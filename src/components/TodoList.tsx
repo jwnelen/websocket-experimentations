@@ -48,7 +48,6 @@ export default function TodoList() {
                             const isDuplicate = currentTodos.some(
                                 (todo) => todo.id === new_todo.id,
                             );
-                            console.log(currentTodos, new_todo, isDuplicate);
                             return isDuplicate
                                 ? currentTodos
                                 : [new_todo, ...currentTodos];
@@ -93,9 +92,7 @@ export default function TodoList() {
             if (error) {
                 throw error;
             }
-
-            // Update local state by filtering out the deleted todo
-            setTodos((previous) => previous.filter((todo) => todo.id !== id));
+            
         } catch (error) {
             console.error('Error deleting todo:', error);
             if (todoToDelete && todoIndex !== -1) {
@@ -110,16 +107,14 @@ export default function TodoList() {
         }
     };
 
-    if (isLoading) {
-        return <p>Loading...</p>;
-    }
-
+    const IsLoadingComponent = () => <p>Loading...</p>
     return (
         <div className="flex justify-center w-full">
             <div className="mt-4 space-y-2 w-xl">
                 <AddTodo onAddTodo={handleAddTodo}></AddTodo>
                 <ul className="mt-4 space-y-2 md:w-xl">
-                    {todos.map((todo) => (
+                    {isLoading ? <IsLoadingComponent/> :
+                    todos.map((todo) => (
                         <TodoCard
                             todo={todo}
                             key={todo.id}
