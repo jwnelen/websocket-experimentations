@@ -45,7 +45,7 @@ export default function Home() {
         socket.disconnect();
       }
     };
-  }, []);
+  }, [socket]);
 
   const handleLocalMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const message : string = e.target.value

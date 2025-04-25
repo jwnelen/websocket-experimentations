@@ -43,7 +43,7 @@ export default function AddTodo({ onAddTodo }: AddTodoProps) {
 
       onAddTodo(data)
       setTitle('')
-    } catch (error: any) {
+    } catch (error) {
       console.log(error)
     } finally {
       setLoading(false)

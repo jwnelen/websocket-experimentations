@@ -14,8 +14,6 @@ export default function TodoList() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const supabase = createClient()
 
-
-
   useEffect(() => {
     const fetchTodos = async () => {
       setIsLoading(true)
@@ -27,7 +25,7 @@ export default function TodoList() {
 
       try {
         console.log("loading")
-      } catch (error: any) {
+      } catch (error) {
         console.log("error", error)
       } finally {
         setIsLoading(false)
@@ -35,7 +33,7 @@ export default function TodoList() {
     }
 
     fetchTodos()
-  }, [])
+  }, [supabase])
 
   const handleAddTodo = async (newTodo: Todo) => {
     setTodos(previous => [newTodo, ...previous]);
@@ -45,22 +43,21 @@ export default function TodoList() {
     return <p>Loading...</p>
   }
 
-
   return (
-  <div>
-    <AddTodo onAddTodo={handleAddTodo}></AddTodo>
-    <ul className="mt-4 space-y-2">
-      {todos.map((todo) => (
-        <li 
-          key={todo.id}
-          className="p-3 rounded shadow flex items-center"
-        >
-          <span className="">
-            {todo.title}
-          </span>
-        </li>
-      ))}
-    </ul>
-  </div>
+    <div>
+      <AddTodo onAddTodo={handleAddTodo}></AddTodo>
+      <ul className="mt-4 space-y-2">
+        {todos.map((todo) => (
+          <li 
+            key={todo.id}
+            className="p-3 rounded shadow flex items-center"
+          >
+            <span className="">
+              {todo.title}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
