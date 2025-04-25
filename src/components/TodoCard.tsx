@@ -1,6 +1,6 @@
-interface OnDeleteProps {
-    onDelete: (id: string) => void;
-}
+'use client';
+
+type OnDeleteProps = (id: string) => void;
 
 interface Todo {
     id: string;
@@ -16,8 +16,10 @@ export default function TodoCard({
     onDelete: OnDeleteProps;
 }) {
     return (
-        <li key={todo.id} className="p-3 rounded shadow flex items-center">
+        <li className="p-3 w-full rounded shadow flex justify-between">
             <span className="">{todo.title}</span>
+            <button className="text-white cursor-pointer hover:text-amber-600"
+            onClick={() => onDelete(todo.id)}>Delete</button>
         </li>
     );
 }

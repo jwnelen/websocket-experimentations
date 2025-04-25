@@ -29,8 +29,6 @@ export default function AddTodo({ onAddTodo }: AddTodoProps) {
         setLoading(true);
 
         try {
-            console.log('adding');
-
             const { data, error } = await supabase
                 .from('todos')
                 .insert([{ title }])
